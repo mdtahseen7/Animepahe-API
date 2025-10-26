@@ -246,6 +246,6 @@ async def api_resolve_kwik(url: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@app.get("/")
+@app.get("/health")
 def alive():
     return {"status": "ok", "message": "Animepahe API is alive!"}
