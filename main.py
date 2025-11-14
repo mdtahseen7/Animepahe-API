@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import cloudscraper
 
 # -------------------- Utility --------------------
@@ -208,6 +209,16 @@ class AnimePahe:
 
 # -------------------- FastAPI --------------------
 app = FastAPI()
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for development
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 pahe = AnimePahe()
 
 
