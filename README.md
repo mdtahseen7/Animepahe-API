@@ -1,3 +1,13 @@
+---
+title: Animepahe API
+emoji: 🎬
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 # AnimePahe API Scraper
 
 🚀 **Been trying to find an actually working AnimePahe API that can bypass Cloudflare? Well, this repo has got your back!**  
