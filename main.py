@@ -186,13 +186,15 @@ class AnimePahe:
 
         # fallback using execjs
         try:
+            escaped_inner_js = inner_js.replace('`', '\\`')
+            regex_pattern = r'/^(var|const|let|j)\s*q\s*=/'
             js_code = (
                 "var window = { location: {} };"
                 "var document = { cookie: '' };"
                 "var navigator = { userAgent: 'mozilla' };"
                 "var q; "
-                f"var code = `{inner_js.replace('`', '\\`')}`.trim();"
-                f"code = code.replace(/^(var|const|let|j)\\s*q\\s*=/, 'q=');"
+                f"var code = `{escaped_inner_js}`.trim();"
+                f"code = code.replace({regex_pattern}, 'q=');"
                 "eval(code); return q;"
             )
             js_m3u8 = execjs.exec_(js_code)
