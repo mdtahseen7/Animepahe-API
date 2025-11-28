@@ -210,7 +210,13 @@ class AnimePahe:
 
 
 # -------------------- FastAPI --------------------
-app = FastAPI()
+app = FastAPI(
+    title="Animepahe API",
+    description="A FastAPI-based web scraper for Animepahe to search anime, get episodes, and resolve streaming sources",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
 
 # Configure CORS
 app.add_middleware(
@@ -222,6 +228,22 @@ app.add_middleware(
 )
 
 pahe = AnimePahe()
+
+
+@app.get("/")
+async def root():
+    return {
+        "message": "Welcome to Animepahe API",
+        "endpoints": {
+            "search": "/search?q=naruto",
+            "episodes": "/episodes?session=anime-session-id",
+            "sources": "/sources?anime_session=xxx&episode_session=yyy",
+            "m3u8": "/m3u8?url=kwik-url",
+            "health": "/health",
+            "docs": "/docs"
+        },
+        "documentation": "/docs"
+    }
 
 
 @app.get("/search")
